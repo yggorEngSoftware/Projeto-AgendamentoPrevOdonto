@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import br.com.prevodonto.domain.Cliente;
 import br.com.prevodonto.repository.ClienteRepository;
 import br.com.prevodonto.service.ClienteService;
+import br.com.prevodonto.service.exception.ObjectNotFoundException;
 import javassist.NotFoundException;
 
 @Service
@@ -39,7 +40,7 @@ public class ClienteServiceImpl implements ClienteService {
 
 	public Cliente find(Integer id) {
 		Optional<Cliente> obj = repository.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(()-> new ObjectNotFoundException("Objeto não encontrado: Id: " +id + Cliente.class.getName()));
 	}
 
 }

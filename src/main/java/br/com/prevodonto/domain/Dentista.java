@@ -1,11 +1,16 @@
 package br.com.prevodonto.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Dentista implements Serializable {
@@ -18,6 +23,10 @@ public class Dentista implements Serializable {
 	private String cpf;
 	// passar para enum
 	private String especialidade;
+
+	@JsonBackReference
+	@ManyToMany(mappedBy="dentistas")
+	private List<Cliente> clientes = new ArrayList<>();
 
 	public Dentista() {
 		super();
@@ -76,6 +85,14 @@ public class Dentista implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
+	}
+
+	public List<Cliente> getClientes() {
+		return clientes;
+	}
+
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
 	}
 
 	@Override

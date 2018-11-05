@@ -2,14 +2,22 @@ package br.com.prevodonto.domain;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.br.CPF;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Cliente implements Serializable {
@@ -23,6 +31,12 @@ public class Cliente implements Serializable {
 	private String cpf;
 	private LocalDate dataInscricao = LocalDate.now();
 	private LocalDate dataAgendada;
+
+	@JsonManagedReference
+	@ManyToMany
+	@JoinTable(name = "CLIENTE_DENTISTA", joinColumns = @JoinColumn(name = "cliente_id"), 
+	inverseJoinColumns = @JoinColumn(name = "dentista_id"))
+	private List<Dentista> dentistas = new ArrayList<>();
 
 	public Cliente() {
 	}
@@ -74,6 +88,14 @@ public class Cliente implements Serializable {
 
 	public void setDataInscricao(LocalDate dataInscricao) {
 		this.dataInscricao = dataInscricao;
+	}
+
+	public List<Dentista> getDentistas() {
+		return dentistas;
+	}
+
+	public void setDentistas(List<Dentista> dentistas) {
+		this.dentistas = dentistas;
 	}
 
 	@Override
