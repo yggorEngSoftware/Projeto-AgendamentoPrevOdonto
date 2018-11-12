@@ -42,7 +42,7 @@ public class ClienteResource {
 	
 	@GetMapping(value = "/{id}")
 	@CrossOrigin
-	public ResponseEntity<Cliente> findById(@PathVariable Integer id) {
+	public ResponseEntity<Cliente> findById(@PathVariable Long id) {
 		return ResponseEntity.ok(this.service.find(id));
 	}
 }

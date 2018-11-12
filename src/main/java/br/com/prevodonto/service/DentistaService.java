@@ -1,19 +1,19 @@
 package br.com.prevodonto.service;
 
-import br.com.prevodonto.domain.Cliente;
+import br.com.prevodonto.domain.Dentista;
 import javassist.NotFoundException;
 
 /**
  * @author yggor
  *
  */
-public interface ClienteService {
+public interface DentistaService {
 
 	/**
-	 * @param cliente
+	 * @param dentista
 	 * @return
 	 */
-	Cliente salvar(Cliente cliente);
+	Dentista salvar(Dentista dentista);
 	
 	/**
 	 * @param id
@@ -21,7 +21,8 @@ public interface ClienteService {
 	 */
 	void deletar(Long id) throws NotFoundException;
 	
-	Cliente filtrarPorCpf(String cpf) throws NotFoundException;
+	Dentista filtrarPorCpf(String cpf) throws NotFoundException;
 	
-	public Cliente find(Long id) ;
+	public Dentista find(Long id);
+
 }

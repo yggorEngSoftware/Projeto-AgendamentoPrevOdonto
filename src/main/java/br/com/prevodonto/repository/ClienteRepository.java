@@ -12,7 +12,7 @@ import br.com.prevodonto.domain.Cliente;
  *
  */
 @Repository
-public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
+public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
 	/**
 	 * @param cpf
