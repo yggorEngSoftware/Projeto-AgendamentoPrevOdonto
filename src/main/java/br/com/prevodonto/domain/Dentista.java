@@ -4,14 +4,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Dentista implements Serializable {
@@ -25,12 +25,9 @@ public class Dentista implements Serializable {
 	// passar para enum
 	private String especialidade;
 
-	@JsonBackReference
-	@ManyToMany(mappedBy = "dentista")
-	private List<Cliente> cliente = new ArrayList<>();
 	
-	@JsonBackReference
-	@OneToMany(mappedBy = "dentista")
+	@JsonIgnore
+	@OneToMany(mappedBy = "dentista", cascade= CascadeType.REFRESH)
 	private List<Atendimento> atendimento = new ArrayList<>();
 
 	public Dentista() {
@@ -42,6 +39,15 @@ public class Dentista implements Serializable {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.especialidade = especialidade;
+	}
+	
+	
+	public List<Atendimento> getAtendimento() {
+		return atendimento;
+	}
+
+	public void setAtendimento(List<Atendimento> atendimento) {
+		this.atendimento = atendimento;
 	}
 
 	public Long getId() {
@@ -74,18 +80,6 @@ public class Dentista implements Serializable {
 
 	public void setEspecialidade(String especialidade) {
 		this.especialidade = especialidade;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public List<Cliente> getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(List<Cliente> cliente) {
-		this.cliente = cliente;
 	}
 
 }

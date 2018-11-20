@@ -37,17 +37,18 @@ public class AgendamentoPrevOdontoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Cliente c1 = new Cliente(null, "Igor", "12843335663", LocalDate.now());
-		Cliente c2 = new Cliente(null, "Ian", "12843335662", LocalDate.now());
 
 		Dentista d1 = new Dentista(null, "Igor", "nada demais", "sei la");
 		Dentista d2 = new Dentista(null, "Igor2", "nada demais2", "sei la2");
 
-		d1.getCliente().addAll(Arrays.asList(c1));
-		d2.getCliente().addAll(Arrays.asList(c2));
+		Cliente c1 = new Cliente(null, "Igor", "12843335663", LocalDate.now());
+		Cliente c2 = new Cliente(null, "Ian", "55150624691", LocalDate.now());
+		
+//		d1.getCliente().addAll(Arrays.asList(c1));
+//		d2.getCliente().addAll(Arrays.asList(c2));
 
-		c1.getDentista().addAll(Arrays.asList(d1));
-		c2.getDentista().addAll(Arrays.asList(d2));
+//		c1.getDentista().addAll(Arrays.asList(d1));
+//		c2.getDentista().addAll(Arrays.asList(d2));
 
 		dentistaRepository.saveAll(Arrays.asList(d1, d2));
 		clienteRepository.saveAll(Arrays.asList(c1, c2));

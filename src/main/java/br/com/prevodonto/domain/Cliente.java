@@ -4,19 +4,16 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotBlank;
-import org.hibernate.validator.constraints.br.CPF;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Cliente implements Serializable {
@@ -24,18 +21,16 @@ public class Cliente implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotBlank(message = "nome nao pode vir nullo")
+//	@NotBlank(message = "nome nao pode vir nullo")
 	private String nome;
 //	@CPF(message = "cpf invalido")
 	private String cpf;
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private LocalDate dataInscricao = LocalDate.now();
-	@JsonManagedReference
-	@ManyToMany
-	@JoinTable(name = "CLIENTE_DENTISTA", joinColumns = @JoinColumn(name = "cliente_id"), inverseJoinColumns = @JoinColumn(name = "dentista_id"))
-	private List<Dentista> dentista = new ArrayList<>();
+	
 
-	@JsonBackReference
-	@OneToMany(mappedBy = "cliente")
+	@JsonIgnore
+	@OneToMany(mappedBy = "cliente", cascade= CascadeType.REFRESH)
 	private List<Atendimento> atendimento = new ArrayList<>();
 
 	public Cliente() {
@@ -47,6 +42,14 @@ public class Cliente implements Serializable {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.dataInscricao = dataInscricao;
+	}
+	
+	public List<Atendimento> getAtendimento() {
+		return atendimento;
+	}
+	
+	public void setAtendimento(List<Atendimento> atendimento) {
+		this.atendimento = atendimento;
 	}
 
 	public Long getId() {
@@ -80,14 +83,6 @@ public class Cliente implements Serializable {
 
 	public void setDataInscricao(LocalDate dataInscricao) {
 		this.dataInscricao = dataInscricao;
-	}
-
-	public List<Dentista> getDentista() {
-		return dentista;
-	}
-
-	public void setDentista(List<Dentista> dentista) {
-		this.dentista = dentista;
 	}
 
 }

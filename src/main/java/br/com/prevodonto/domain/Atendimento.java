@@ -1,9 +1,9 @@
 package br.com.prevodonto.domain;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.prevodonto.domain.enums.EstadoAtendimento;
 
@@ -22,16 +22,16 @@ public class Atendimento implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private LocalDateTime dataAtendimento;
 	private String servico;
 	private Integer estado;
 
-	@JsonManagedReference
-	@ManyToOne
+	
+	@ManyToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
-	@JsonManagedReference
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "dentista_id")
 	private Dentista dentista;
 

@@ -24,5 +24,9 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 	 * @param nome
 	 * @return
 	 */
-	Cliente findByNome(String nome);
+	Optional<Cliente> findByNome(String nome);
+
+
+	
+	
 }
