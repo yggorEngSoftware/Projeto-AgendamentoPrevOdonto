@@ -56,7 +56,7 @@ public class AtendimentoResource {
 	@CrossOrigin
 	public ResponseEntity<Page<AtendimentoDTO>> findPage(@RequestParam(name = "page", defaultValue = "0") Integer page,
 			@RequestParam(name = "linesPerPage", defaultValue = "24") Integer linesPerPage,
-			@RequestParam(name = "orderBy", defaultValue = "nome") String orderBy,
+			@RequestParam(name = "orderBy", defaultValue = "dataAtendimento") String orderBy,
 			@RequestParam(name = "direction", defaultValue = "ASC") String direction) {
 		Page<Atendimento> list = this.service.findPage(page, linesPerPage, orderBy, direction);
 		Page<AtendimentoDTO> listDto = list.map(obj -> new AtendimentoDTO(obj));
