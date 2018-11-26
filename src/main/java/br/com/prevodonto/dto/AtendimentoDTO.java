@@ -16,12 +16,15 @@ public class AtendimentoDTO implements Serializable {
 	private LocalDateTime dataAtendimento;
 	private String servico;
 	private Integer estado;
+	private String estadoString;
 	private Long clienteId;
 	private Long dentistaId;
 
 	private String nomeCliente;
 
 	private String nomeDentista;
+	
+	private String cpfDentista;
 
 	public AtendimentoDTO() {
 	}
@@ -35,8 +38,12 @@ public class AtendimentoDTO implements Serializable {
 		this.dentistaId = atendimento.getDentista().getId();
 		this.nomeCliente = atendimento.getCliente().getNome();
 		this.nomeDentista = atendimento.getDentista().getNome();
+		this.cpfDentista = atendimento.getDentista().getCpf();
+		this.estadoString = atendimento.getEstado().getDescricao();
 	}
-	
+	public String getEstadoString() {
+		return estadoString;
+	}
 
 	public Long getId() {
 		return id;
@@ -44,6 +51,15 @@ public class AtendimentoDTO implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+
+	public String getCpfDentista() {
+		return cpfDentista;
+	}
+
+	public void setCpfDentista(String cpfDentista) {
+		this.cpfDentista = cpfDentista;
 	}
 
 	public LocalDateTime getDataAtendimento() {

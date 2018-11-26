@@ -96,4 +96,9 @@ public class AtendimentoServiceImpl implements AtendimentoService {
 //		den.getAtendimento().add(aten);
 		return aten;
 	}
+
+	@Override
+	public List<Atendimento> findAllByCpfDentista(String cpf) {
+		return this.repository.findByDentistaCpf(cpf);
+	}
 }

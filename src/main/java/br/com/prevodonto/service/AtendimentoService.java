@@ -33,5 +33,7 @@ public interface AtendimentoService {
 
 	public Atendimento atualizar(Atendimento atendimento) throws NotFoundException;
 
+	public List<Atendimento> findAllByCpfDentista(String cpf);
+
 
 }

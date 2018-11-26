@@ -12,5 +12,4 @@ public interface DentistaRepository extends JpaRepository<Dentista, Long> {
 	Optional<Dentista> findByCpf(String cpf);
 
 	Optional<Dentista> findByNome(String nome);
-
 }

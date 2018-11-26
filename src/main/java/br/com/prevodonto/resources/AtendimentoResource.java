@@ -45,6 +45,14 @@ public class AtendimentoResource {
 		List<AtendimentoDTO> listDto = list.stream().map(obj -> new AtendimentoDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
 	}
+	
+	@GetMapping(value = "/cpf")
+	@CrossOrigin
+	public ResponseEntity<List<AtendimentoDTO>> findAllByCpfDentista(@RequestParam(name = "cpf") String cpf) {
+		List<Atendimento> list = this.service.findAllByCpfDentista(cpf);
+		List<AtendimentoDTO> listDto = list.stream().map(obj -> new AtendimentoDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
+	}
 
 	@GetMapping(value = "/{id}")
 	@CrossOrigin
