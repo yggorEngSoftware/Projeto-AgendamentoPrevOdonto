@@ -11,7 +11,7 @@ public class AtendimentoNewDTO implements Serializable {
 
 	private Long id;
 
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+	@JsonFormat(pattern = "d/M/yyyy H:mm")
 	private LocalDateTime dataAtendimento;
 	private String servico;
 	private Integer estado;
