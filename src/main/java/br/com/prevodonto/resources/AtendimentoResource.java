@@ -40,7 +40,7 @@ public class AtendimentoResource {
 
 	@GetMapping
 	@CrossOrigin
-	public ResponseEntity<List<AtendimentoDTO>> findAll(@RequestParam(name = "orderBy", defaultValue = "dataAtendimento") String orderBy) {
+	public ResponseEntity<List<AtendimentoDTO>> findAll() {
 		List<Atendimento> list = this.service.findAll();
 		List<AtendimentoDTO> listDto = list.stream().map(obj -> new AtendimentoDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
