@@ -6,7 +6,8 @@ public enum EstadoAtendimento {
 	ATENDIDO(2,"Atendido"),
 	ATRASADO(3,"Atrasado"),
 	CANCELADO(4,"Cancelado"),
-	ATENDIMENTO(5, "Em Atendimento");
+	ATENDIMENTO(5, "Em Atendimento"),
+	EMESPERA(6, "Em espera");
 	
 	private Integer cod;
 	private String descricao;
