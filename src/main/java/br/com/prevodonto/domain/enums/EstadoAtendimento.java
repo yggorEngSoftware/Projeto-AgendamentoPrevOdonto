@@ -2,10 +2,11 @@ package br.com.prevodonto.domain.enums;
 
 
 public enum EstadoAtendimento {
-	PENDENTE(1,"Pendente"),
+	PENDENTE(1,"Pendente "),
 	ATENDIDO(2,"Atendido"),
 	ATRASADO(3,"Atrasado"),
-	CANCELADO(4,"Cancelado");
+	CANCELADO(4,"Cancelado"),
+	ATENDIMENTO(5, "Em Atendimento");
 	
 	private Integer cod;
 	private String descricao;
